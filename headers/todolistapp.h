@@ -1,17 +1,21 @@
-#ifndef TODOLISTAPP_H
-#define TODOLISTAPP_H
+#pragma once
 
-#include <QMainWindow>
-#include <QPushButton>
+#include <QComboBox>
+#include <QLabel>
 #include <QLineEdit>
 #include <QListWidget>
-#include <QLabel>
+#include <QMainWindow>
+#include <QPushButton>
+#include <QString>
+#include <QVector>
+
 #include "task.h"
 
 class ToDoListApp : public QMainWindow {
     Q_OBJECT
+
 public:
-    ToDoListApp(QWidget *parent = nullptr);
+    explicit ToDoListApp(QWidget *parent = nullptr);
 
 private slots:
     void addTask();
@@ -19,21 +23,28 @@ private slots:
     void saveTasks();
     void loadTasks();
     void addImageToTask();
+    void deleteSelectedTask();
 
 private:
+    QLineEdit *taskInput = nullptr;
+    QComboBox *priorityBox = nullptr;
+    QLineEdit *deadlineInput = nullptr;
+    QLineEdit *tagsInput = nullptr;
+    QLineEdit *searchInput = nullptr;
+
+    QPushButton *addButton = nullptr;
+    QListWidget *taskList = nullptr;
+    QPushButton *deleteButton = nullptr;
+    QPushButton *saveButton = nullptr;
+    QPushButton *loadButton = nullptr;
+    QPushButton *addImageButton = nullptr;
+    QLabel *imageLabel = nullptr;
+
+    QVector<Task> tasks;
+    QString cacheFilePath;
+
     void updateTaskList();
     void cacheTasksToFile();
     void cacheTasksFromCacheFile();
-
-    QLineEdit *taskInput;
-    QPushButton *addButton;
-    QListWidget *taskList;
-    QPushButton *saveButton;
-    QPushButton *loadButton;
-    QPushButton *addImageButton;
-    QLabel *imageLabel;
-    QVector<Task> tasks;
-    QString cacheFilePath;
+    int selectedTaskIndex() const;
 };
-
-#endif // TODOLISTAPP_H

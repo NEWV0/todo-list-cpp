@@ -133,4 +133,8 @@ compile_commands.json
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,qtcreator,qt
+# End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,qtcreator,qtbuild/
+.DS_Store
+cached_tasks.json
+tasks.txt
+build/

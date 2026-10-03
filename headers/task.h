@@ -1,23 +1,43 @@
-#ifndef TASK_H
-#define TASK_H
+#pragma once
 
 #include <QString>
-#include <QPixmap>
+#include <QStringList>
+
+enum class Priority {
+    Low,
+    Medium,
+    High
+};
+
+QString priorityToString(Priority priority);
+Priority priorityFromString(const QString &value);
 
 class Task {
 public:
-    Task(const QString &description, bool completed = false);
+    explicit Task(const QString &description, bool completed = false);
+
     QString getDescription() const;
     bool isCompleted() const;
     void toggleComplete();
-    void setImagePath(const QString &path);
+
     QString getImagePath() const;
-    QPixmap getImage() const;
+    void setImagePath(const QString &path);
+
+    Priority getPriority() const;
+    void setPriority(Priority priority);
+
+    QString getDeadline() const;
+    void setDeadline(const QString &deadline);
+
+    QStringList getTags() const;
+    void setTags(const QStringList &tags);
 
 private:
     QString description;
     bool completed;
     QString imagePath;
-};
 
-#endif // TASK_H
+    Priority priority = Priority::Medium;
+    QString deadline;
+    QStringList tags;
+};
